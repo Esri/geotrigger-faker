@@ -46,4 +46,4 @@ More info:
 
 ## Todo
 
-* Remove geotriggers.js from `lib/` (once it's published on npm)
+* Remove [geotriggers.js](https://github.com/esri/geotriggers-js) from `lib/` (once it's published on npm)
