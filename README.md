@@ -39,3 +39,11 @@ faker.send(locationObject, function(error, response){
 ```
 
 That's it!
+
+More info:
+
+* [location objects](http://esri.github.io/geotrigger-docs/api/location/update/)
+
+## Todo
+
+* Remove geotriggers.js from `lib/` (once it's published on npm)
