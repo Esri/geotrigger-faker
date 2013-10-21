@@ -8,6 +8,18 @@ var faker = new Geofaker({
   clientId: clientId
 });
 
-faker.send({
-  latLng: 'blah'
+var payload = {
+  'locations': [
+    {
+      latitude: 51.883333,
+      longitude: -176.645,
+      accuracy: 10.0,
+      timestamp: '2012-05-09T16:03:53-0700',
+      trackingProfile: 'adaptive'
+    }
+  ]
+};
+
+faker.send(payload, function(error, response){
+  console.log(error, response);
 });
