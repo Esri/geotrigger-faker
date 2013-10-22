@@ -2,7 +2,7 @@
   "name": "geofaker",
   "version": "0.0.0",
   "description": "Make fake location updates for the Geotrigger API",
-  "main": "index.js",
+  "main": "dist/node/geofaker.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -12,5 +12,9 @@
   "dependencies": {
     "xmlhttprequest": "~1.6.0",
     "request": "~2.27.0"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-concat": "~0.3.0"
   }
 }

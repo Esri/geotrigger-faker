@@ -1,8 +1,3 @@
-process.chdir(__dirname);
-
-var Geotriggers = require('./lib/geotriggers');
-var arcgis = require('./lib/arcgis');
-
 // geofaker api (public)
 // ---------------------
 
@@ -101,5 +96,3 @@ function registerDevice () {
   });
 
 }
-
-module.exports = Geofaker;

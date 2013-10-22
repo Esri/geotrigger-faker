@@ -40,7 +40,37 @@ faker.send(locationObject, function(error, response){
 
 That's it!
 
-More info:
+## Distributions
+
+### Node.js
+
+Location: `/geofaker.js` (root)
+
+### Browser
+
+Location: `/browser/dist/geofaker.js`
+
+Requires [geotriggers.js](https://github.com/esri/geotriggers-js).
+
+## Examples
+
+### CLI
+
+Location: `/examples/cli/cli.js`
+
+Can be run with the following command, where XXXXXX is a valid Client ID:
+
+```sh
+$ node examples/cli/cli.js XXXXXX
+```
+
+### Browser
+
+Location: `/examples/browser/index.html`
+
+Can be run by serving the repo at the root directory without something like [nodefront]() or `python -m SimpleHTTPServer`.
+
+## Reference
 
 * [location objects](http://esri.github.io/geotrigger-docs/api/location/update/)
 

@@ -1,0 +1,3 @@
+window.Geofaker = Geofaker;
+
+})(window);

@@ -1,4 +1,6 @@
-var Geofaker = require('../');
+// usage: node cli.js CLIENT_ID
+
+var Geofaker = require('../../geofaker');
 
 var options = process.argv.slice(2);
 
@@ -20,6 +22,9 @@ var payload = {
   ]
 };
 
+console.log('sending location..');
+
 faker.send(payload, function(error, response){
-  console.log(error, response);
+  console.log('error:', error);
+  console.log('response:', response);
 });
