@@ -1,7 +1,11 @@
 module.exports = function(grunt) {
 
   grunt.initConfig({
+
+    // concatenation for different distributions
     concat: {
+
+      // Browser distribution
       browser: {
         src: [
           'src/browser/header.js',
@@ -10,6 +14,8 @@ module.exports = function(grunt) {
         ],
         dest: 'dist/browser/geofaker.js'
       },
+
+      // Node distribution
       node: {
         src: [
           'src/node/header.js',
@@ -23,7 +29,7 @@ module.exports = function(grunt) {
 
   grunt.loadNpmTasks('grunt-contrib-concat');
 
-  grunt.registerTask('dist', [
+  grunt.registerTask('default', [
     'concat:browser',
     'concat:node'
   ]);
