@@ -4,6 +4,8 @@ Tiny utility to register a device and send location updates to the ArcGIS Geotri
 
 ## Usage
 
+### Node.js
+
 ```js
 var Geofaker = require('geofaker');
 
@@ -33,12 +35,37 @@ var locationObject = {
 };
 
 faker.send(locationObject, function(error, response){
-  console.log(error, response);
+  console.log('error:', error);
+  console.log('response:', response);
 });
-
 ```
 
-That's it!
+### Browser
+
+```js
+var clientId = prompt('Client ID:');
+
+var faker = new Geofaker({
+  clientId: clientId
+});
+
+var payload = {
+  'locations': [
+    {
+      latitude: 51.883333,
+      longitude: -176.645,
+      accuracy: 10.0,
+      timestamp: '2012-05-09T16:03:53-0700',
+      trackingProfile: 'adaptive'
+    }
+  ]
+};
+
+faker.send(payload, function(error, response){
+  console.log('error:', error);
+  console.log('response:', response);
+});
+```
 
 ## Distributions
 
@@ -68,7 +95,7 @@ $ node examples/cli/cli.js XXXXXX
 
 Location: `/examples/browser/index.html`
 
-Can be run by serving the repo at the root directory without something like [nodefront]() or `python -m SimpleHTTPServer`.
+Can be run by serving the repo at the root directory with something like [nodefront](http://karthikv.github.io/nodefront/) or `python -m SimpleHTTPServer`.
 
 ## Reference
 
@@ -77,3 +104,4 @@ Can be run by serving the repo at the root directory without something like [nod
 ## Todo
 
 * Remove [geotriggers.js](https://github.com/esri/geotriggers-js) from `lib/` (once it's published on npm)
+* Move ArcGIS device registration logic to a separate repo
