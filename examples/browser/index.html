@@ -16,23 +16,16 @@
     clientId: clientId
   });
 
-  var payload = {
-    'locations': [
-      {
-        latitude: 51.883333,
-        longitude: -176.645,
-        accuracy: 10.0,
-        timestamp: '2012-05-09T16:03:53-0700',
-        trackingProfile: 'adaptive'
-      }
-    ]
+  var update = {
+    latitude: 51.883333,
+    longitude: -176.645
   };
 
   console.log('sending location...');
+  console.log(this.deviceId);
 
-  faker.send(payload, function(error, response){
-    console.log('error:', error);
-    console.log('response:', response);
+  faker.session.queue(function(){
+    console.log(this.deviceId);
   });
   </script>
 </body>

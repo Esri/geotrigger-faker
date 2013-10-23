@@ -1,29 +1,47 @@
 (function(window, undefined){
 
-var arcgis = {};
+// polyfills
+// ---------
 
-arcgis.registerDevice = function (clientId, callback) {
+// Date.toISOString polyfill
+// -------------------------
+//
+if ( !Date.prototype.toISOString ) {
+  ( function() {
 
-  var url = 'https://www.arcgis.com/sharing/oauth2/registerDevice';
-  var params = 'client_id=' + clientId + '&f=json';
-  var http = new XMLHttpRequest();
-
-  http.open('POST', url, true);
-  http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-
-  http.onreadystatechange = function() {
-    if(http.readyState == 4 && http.status == 200) {
-      try {
-        var tokens = JSON.parse(http.responseText);
-        callback(null, tokens);
-      } catch(e) {
-        callback(e);
+    function pad(number) {
+      var r = String(number);
+      if ( r.length === 1 ) {
+        r = '0' + r;
       }
+      return r;
     }
-  };
 
-  http.send(params);
+    Date.prototype.toISOString = function() {
+      return this.getUTCFullYear()
+        + '-' + pad( this.getUTCMonth() + 1 )
+        + '-' + pad( this.getUTCDate() )
+        + 'T' + pad( this.getUTCHours() )
+        + ':' + pad( this.getUTCMinutes() )
+        + ':' + pad( this.getUTCSeconds() )
+        + '.' + String( (this.getUTCMilliseconds()/1000).toFixed(3) ).slice( 2, 5 )
+        + 'Z';
+    };
 
+  }() );
+}
+
+// defaults
+// --------
+
+var defaults = {};
+
+// locationObject
+// --------------
+//
+defaults.locationObject = {
+  accuracy: 10.0,
+  trackingProfile: 'adaptive'
 };
 
 // geofaker api (public)
@@ -47,9 +65,6 @@ function Geofaker (options) {
   this.session = new Geotriggers.Session({ clientId: this.clientId });
   this._sendQueue = [];
 
-  // register a new fake device
-  registerDevice.apply(this);
-
 }
 
 // send location update
@@ -59,69 +74,66 @@ function Geofaker (options) {
 //
 // location update reference: http://esri.github.io/geotrigger-docs/api/location/update/
 //
-// locationObject required params:
+// locationObject required properties:
 //
 // * latitude
 // * longitude
-// * accuracy
-// * timestamp
-// * trackingProfile
 //
-Geofaker.prototype.send = function (locationObject, callback) {
+// callback is optional
+//
+Geofaker.prototype.send = function (options, callback) {
 
-  var args = Array.prototype.slice.apply(arguments);
+  var locations = [];
+  var type = Object.prototype.toString.call(options);
 
-  // send location update if device has been successfully registered
-  if (typeof this.deviceId !== 'undefined') {
-    sendLocationUpdate.apply(this, args);
+  if (type === '[object Object]') {
+    locations.push( buildLocationObject(options) );
   }
 
-  // push send request to queue if registration isn't done
+  else if (type === '[object Array]') {
+    for (var i=0; i < options.length; i++) {
+      locations.push( buildLocationObject(options[i]) );
+    }
+  }
+
   else {
-    this._sendQueue.push(args);
+    throw new Error('invalid parameter', options);
   }
+
+  var args = [ { locations: locations }, callback ];
+
+  sendLocationUpdate.apply(this, args);
 }
 
 // internal logic (private)
 // ------------------------
 
-function sendLocationUpdate (locationObject, callback) {
+function buildLocationObject (locationObject) {
 
-  // send locationObject to `location/update` using Geofaker's device ID
-  if (typeof callback === 'function') {
-    this.session.request('location/update', locationObject, callback);
-  } else {
-    this.session.request('location/update', locationObject);
+  for (var prop in defaults.locationObject) {
+    if (defaults.locationObject.hasOwnProperty(prop)) {
+      if (prop in locationObject) { continue; }
+      locationObject[prop] = defaults.locationObject[prop];
+    }
   }
+
+  if (typeof locationObject.timestamp === 'undefined') {
+    var date = new Date();
+    locationObject.timestamp = date.toISOString();
+  }
+
+  return locationObject;
 
 }
 
-function registerDevice () {
+function sendLocationUpdate (locations, callback) {
 
-  var self = this; // sorry.js :(
-
-  arcgis.registerDevice(this.clientId, function(error, response){
-
-    // fail loudly and leave if there's a registration error
-    if (error) {
-      console.log('Device Registration Error', error);
-      return null;
-    }
-
-    // attach important info
-    self.deviceId = response.device.deviceId;
-    self.access_token = response.device.access_token;
-    self.refresh_token = response.device.access_token;
-
-    // just in case
-    if (typeof self.deviceId !== 'undefined') {
-      // send any updates that have been queued
-      while (self._sendQueue.length) {
-        self.send.apply(self, self._sendQueue.shift());
-      }
-    }
-
-  });
+  // send locations to `location/update` using Geofaker's device ID
+  if (typeof callback === 'function') {
+    this.session.request('location/update', locations, callback);
+  } else {
+    this.session.request('location/update', locations);
+  }
 
 }
 
