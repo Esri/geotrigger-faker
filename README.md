@@ -75,7 +75,7 @@ Location: `/geofaker.js` (root)
 
 ### Browser
 
-Location: `/browser/dist/geofaker.js`
+Location: `/dist/browser/geofaker.js`
 
 Requires [geotriggers.js](https://github.com/esri/geotriggers-js).
 
