@@ -21,9 +21,11 @@
     longitude: -176.645
   };
 
-  device.setTags(['taggable']).send(update, function(error, response){
-    console.log('error:', error);
-    console.log('response:', response);
+  device.setTags(['taggable'], function(){
+    device.send(update, function(error, response){
+      console.log('error:', error);
+      console.log('response:', response);
+    });
   });
   </script>
 </body>

@@ -36,6 +36,8 @@ if ( !Date.prototype.toISOString ) {
 
 var defaults = {};
 
+function FNOP () {}
+
 // locationObject
 // --------------
 //
@@ -85,7 +87,7 @@ Geofaker.prototype.setTags = function (tags, callback) {
     if (typeof callback === 'function') {
       this.request('device/update', request, callback);
     } else {
-      this.request('device/update', request);
+      this.request('device/update', request, FNOP);
     }
   });
 
@@ -182,7 +184,7 @@ function sendLocationUpdate (locations, callback) {
     });
   } else {
     this.session.queue(function(){
-      this.request('location/update', locations);
+      this.request('location/update', locations, FNOP);
     });
   }
 
