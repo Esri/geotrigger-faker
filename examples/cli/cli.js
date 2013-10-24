@@ -10,21 +10,26 @@ var faker = new Geofaker({
   clientId: clientId
 });
 
-var payload = {
-  'locations': [
-    {
-      latitude: 51.883333,
-      longitude: -176.645,
-      accuracy: 10.0,
-      timestamp: '2012-05-09T16:03:53-0700',
-      trackingProfile: 'adaptive'
-    }
-  ]
-};
-
 console.log('sending location..');
 
-faker.send(payload, function(error, response){
+faker.send({
+  longitude: -122.716598510742,
+  latitude: 45.5780033058926
+}, function(error, response){
+  console.log('error:', error);
+  console.log('response:', response);
+});
+
+faker.send([
+  {
+    longitude: -122.716598510742,
+    latitude: 45.5780033058926
+  },
+  {
+    longitude: -122.712478637695,
+    latitude: 45.6022688149858
+  }
+], function(error, response){
   console.log('error:', error);
   console.log('response:', response);
 });
