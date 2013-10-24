@@ -3,30 +3,57 @@
 <head>
   <meta charset="UTF-8">
   <title>Geofaker</title>
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css">
+  <link rel="stylesheet" href="https://rawgithub.com/Leaflet/Leaflet.draw/master/dist/leaflet.draw.css">
+  <link rel="stylesheet" href="style.css">
+  <!--[if lte IE 8]>
+      <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.ie.css">
+      <link rel="stylesheet" href="https://rawgithub.com/Leaflet/Leaflet.draw/master/dist/leaflet.draw.ie.css">
+  <![endif]-->
 </head>
 <body>
-  <h1>Geofaker example</h1>
-  <p>check your console :)</p>
+  <nav class="navbar navbar-default navbar-static-top" role="navigation">
+    <div class="navbar-header">
+       <a class="navbar-brand">Geofaker</a>
+     </div>
+  </nav>
+  <div class="container">
+
+    <div class="device">
+      <div class="page-header hide">
+        <h1><i class="fa fa-mobile"></i> Mobile Device <small></small></h1>
+      </div>
+
+      <div class="client-id input-group">
+        <span class="input-group-addon">Client ID</span>
+        <input class="form-control" id="clientId" type="text" placeholder="clientId" value="rcMNAPBoIn2M1JoI">
+      </div>
+
+      <div class="tags input-group hide">
+        <span class="input-group-addon">Tags</span>
+        <input class="form-control" id="tags" type="text" placeholder="loading.." disabled>
+      </div>
+
+      <!-- <div class="location input-group hide">
+        <span class="input-group-addon">Location Update</span>
+        <input class="form-control" id="location" type="text" placeholder="lat,lng">
+      </div> -->
+    </div>
+
+    <div class="map-wrap hide">
+      <button type="button" class="btn btn-default location-update"><i class="fa fa-location-arrow"></i> Location Update</button>
+      <div id="map"></div>
+    </div>
+  </div>
+
+  <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+  <script src="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"></script>
+  <script src="http://rawgithub.com/Leaflet/Leaflet.draw/master/dist/leaflet.draw.js"></script>
   <script src="../../lib/geotriggers.js"></script>
   <script src="../../dist/browser/geofaker.js"></script>
-  <script>
-  var clientId = prompt('Client ID:');
 
-  var device = new Geofaker({
-    clientId: clientId
-  });
-
-  var update = {
-    latitude: 51.883333,
-    longitude: -176.645
-  };
-
-  device.setTags(['taggable'], function(){
-    device.send(update, function(error, response){
-      console.log('error:', error);
-      console.log('response:', response);
-    });
-  });
-  </script>
+  <script src="client.js"></script>
 </body>
 </html>
