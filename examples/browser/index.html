@@ -12,7 +12,7 @@
   <script>
   var clientId = prompt('Client ID:');
 
-  var faker = new Geofaker({
+  var device = new Geofaker({
     clientId: clientId
   });
 
@@ -21,11 +21,9 @@
     longitude: -176.645
   };
 
-  console.log('sending location...');
-  console.log(this.deviceId);
-
-  faker.session.queue(function(){
-    console.log(this.deviceId);
+  device.setTags(['taggable']).send(update, function(error, response){
+    console.log('error:', error);
+    console.log('response:', response);
   });
   </script>
 </body>
