@@ -13,28 +13,14 @@ var faker = new Geofaker({
   clientId: 'XXXXXX'
 });
 
-var locationObject = {
-  'locations': [
-    {
-      // Float - latitude
-      latitude: 0.0,
-
-      // Float - longitude
-      longitude: 0.0,
-
-      // Integer - horizontal accuracy of GPS reading, in meters
-      accuracy: 10,
-
-      // String < ISO8601 > - timestamp of when the data was collected
-      timestamp: '2012-05-09T16:03:53-0700',
-
-       // String - the tracking profile of the SDK at the time of location collection
-      trackingProfile: 'adaptive'
-    }
-  ]
+var update = {
+  longitude: -122.716598510742, // required
+  latitude: 45.5780033058926, // required
+  accuracy: 10.0, // optional, defaults to 10.0
+  trackingProfile: 'adaptive' // optional, default to 'adaptive'
 };
 
-faker.send(locationObject, function(error, response){
+faker.send(update, function(error, response){
   console.log('error:', error);
   console.log('response:', response);
 });
@@ -49,19 +35,14 @@ var faker = new Geofaker({
   clientId: clientId
 });
 
-var payload = {
-  'locations': [
-    {
-      latitude: 51.883333,
-      longitude: -176.645,
-      accuracy: 10.0,
-      timestamp: '2012-05-09T16:03:53-0700',
-      trackingProfile: 'adaptive'
-    }
-  ]
+var update = {
+  longitude: -122.716598510742, // required
+  latitude: 45.5780033058926, // required
+  accuracy: 10.0, // optional, defaults to 10.0
+  trackingProfile: 'adaptive' // optional, default to 'adaptive'
 };
 
-faker.send(payload, function(error, response){
+faker.send(update, function(error, response){
   console.log('error:', error);
   console.log('response:', response);
 });
@@ -74,6 +55,8 @@ faker.send(payload, function(error, response){
 Location: `/geofaker.js` (root)
 
 ### Browser
+
+A full-fledged client-side device location spoofer.
 
 Location: `/dist/browser/geofaker.js`
 

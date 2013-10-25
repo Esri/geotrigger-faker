@@ -14,7 +14,7 @@
     fill: true,
     fillOpacity: 0.4,
     triggerId: null,
-    clickable: false
+    clickable: true
   };
 
   var editOptions = {
@@ -160,15 +160,17 @@
       for (var i = 0; i < triggers.length; i++) {
         if (triggers[i].condition && triggers[i].condition.geo) {
           var geo = triggers[i].condition.geo;
+          var layer;
           if (geo.geojson) {
-            new L.GeoJSON(geo.geojson, {
+            layer = new L.GeoJSON(geo.geojson, {
               style: function(feature) {
                 return shapeOptions;
               }
-            }).addTo(fake.triggers);
+            });
           } else if (geo.distance) {
-            new fake.Circle([geo.latitude, geo.longitude], geo.distance).addTo(fake.triggers);
+            layer = new fake.Circle([geo.latitude, geo.longitude], geo.distance);
           }
+          layer.bindPopup('tags: ' + triggers[i].tags.join(', ')).addTo(fake.triggers);
         }
       }
 
