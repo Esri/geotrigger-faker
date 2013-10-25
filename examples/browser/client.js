@@ -1,9 +1,10 @@
 (function(window, undefined){
 
   var fake = {
+    $: {},
     device: null,
     map: null,
-    $: {}
+    tools: {}
   };
 
   var shapeOptions = {
@@ -14,6 +15,18 @@
     fillOpacity: 0.4,
     triggerId: null,
     clickable: false
+  };
+
+  var editOptions = {
+    showArea: false,
+    shapeOptions: {
+      color: '#00dcb1',
+      opacity: 0.8,
+      dashArray: '10, 10',
+      weight: 2,
+      fill: true,
+      fillOpacity: 0.2
+    }
   };
 
   fake.Circle = L.Circle.extend({
@@ -80,7 +93,7 @@
 
       fake.$.tags.removeClass('hide');
       fake.$.device.find('.page-header').removeClass('hide');
-      fake.$.device.find('.page-header small').text(this.deviceId);
+      fake.$.device.find('.page-header small').text('ID: ' + this.deviceId);
 
       initMap();
     });
@@ -117,16 +130,6 @@
     });
   }
 
-  function sendUpdate (latLng, callback) {
-    fake.device.send(latLng, function(error, response){
-      if (error) {
-        callback(error, null);
-      } else {
-        callback(null, response);
-      }
-    });
-  }
-
   function initMap () {
     fake.$.map.removeClass('hide');
 
@@ -146,12 +149,12 @@
     }).addTo(fake.map);
 
     fake.triggers = new L.FeatureGroup();
+    fake.locations = new L.FeatureGroup();
 
     fake.map.addLayer(fake.triggers);
+    fake.map.addLayer(fake.locations);
 
     fake.device.session.request('trigger/list', function(error, response){
-      console.log(error, response);
-
       var triggers = response.triggers;
 
       for (var i = 0; i < triggers.length; i++) {
@@ -175,6 +178,55 @@
         animate: false,
         paddingTopLeft: [0, 0]
       });
+
+      initDraw();
+    });
+  }
+
+  function initDraw () {
+    fake.tools.radius = new L.Draw.Circle(fake.map, editOptions);
+
+    fake.map.on('draw:created', function(event) {
+      fake.$.update.removeAttr('disabled');
+
+      var type = event.layerType;
+      var layer = event.layer;
+      var radius = Math.round(layer.getRadius());
+      var latLng = layer.getLatLng();
+
+      var options = {
+        latitude: latLng.lat,
+        longitude: latLng.lng,
+        accuracy: radius
+      };
+
+      layer.addTo(fake.locations);
+
+      sendUpdate(options, function(error, response){
+        console.log(error, response);
+        layer.setStyle({
+          dashArray: null
+        });
+      });
+    });
+
+    fake.$.update.click(function(event) {
+      event.preventDefault();
+      fake.tools.radius.enable();
+      fake.$.update.attr('disabled','disabled');
+    });
+
+
+    fake.$.update.removeClass('hide');
+  }
+
+  function sendUpdate (options, callback) {
+    fake.device.send(options, function(error, response){
+      if (error) {
+        callback(error, null);
+      } else {
+        callback(null, response);
+      }
     });
   }
 
