@@ -112,8 +112,9 @@
     var tags = [];
 
     for (var i = 0; i < inputTags.length; i++) {
-      if (inputTags[i].indexOf('device:') !== 0) {
-        tags.push(inputTags[i].trim());
+      var tag = inputTags[i].trim();
+      if (tag.indexOf('device:') !== 0) {
+        tags.push(tag);
       }
     }
 
