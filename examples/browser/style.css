@@ -1,25 +1,79 @@
-.input-group {
-    margin-bottom: 1.5em;
-  }
-  .map-wrap {
-    position: relative;
-    height: 500px;
-    z-index: 0;
-  }
-  #map {
-    position: absolute;
-    top: 0;
+html, body {
+  background-color: #777;
+}
+.app-container {
+  margin: 0;
+  position: absolute;
+  top: 51px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.navbar-inverse .navbar-brand,
+.navbar-inverse .navbar-brand:hover {
+  color: #ccc;
+}
+.navbar-inverse .navbar-brand small {
+  color: #999;
+}
+.content {
+  padding: 0;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+}
+@media (max-width: 991px) {
+  .content {
     right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 1;
   }
-  .page-header, h1 {
-    margin-top: 0;
-  }
-  .location-update {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    z-index: 2;
-  }
+}
+.console {
+  border-left: 1px solid #000;
+  padding: 15px;
+  overflow-y: scroll;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+.map-wrap {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+#map {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+}
+.controls {
+  margin: 0;
+  padding: 10px;
+  position: relative;
+  z-index: 2;
+}
+.controls .input-group {
+  padding: 0;
+}
+.controls .tags {
+  padding-bottom: 10px;
+  padding-right: 10px;
+}
+.toggle-console {
+  cursor: pointer;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.console pre {
+  font-size: 11px;
+}
