@@ -149,8 +149,10 @@
     }).addTo(fake.map);
 
     fake.triggers = new L.FeatureGroup();
+    fake.locations = new L.FeatureGroup();
 
     fake.map.addLayer(fake.triggers);
+    fake.map.addLayer(fake.locations);
 
     fake.device.session.request('trigger/list', function(error, response){
       var triggers = response.triggers;
@@ -198,8 +200,13 @@
         accuracy: radius
       };
 
+      layer.addTo(fake.locations);
+
       sendUpdate(options, function(error, response){
         console.log(error, response);
+        layer.setStyle({
+          dashArray: null
+        });
       });
     });
 
