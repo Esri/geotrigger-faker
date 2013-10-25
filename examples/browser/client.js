@@ -36,9 +36,9 @@
   function init () {
     fake.$.update = $('.location-update');
     fake.$.map    = $('.map-wrap');
-    fake.$.device = $('.device');
-    fake.$.id     = fake.$.device.find('.client-id');
-    fake.$.tags   = fake.$.device.find('.tags');
+    fake.$.id     = $('.client-id');
+    fake.$.tags   = $('.tags');
+    fake.$.title  = $('.title');
 
     var update = {
       latitude: 51.883333,
@@ -46,9 +46,38 @@
     };
 
     fake.$.id.on('keypress', '#clientId', initDevice);
-    fake.$.tags.on('keypress', '#tags', submitTags);
+
+    fake.$.tags.on('keypress', '#tags', function(event){
+      var $el = $(this);
+      if ( (event.which !== 13) || ($el.val() === '') ) {
+        return;
+      } else {
+        event.preventDefault();
+        setTags();
+      }
+    });
+
+    fake.$.tags.on('click', '.setTags', function(event){
+      var $el = fake.$.tags.find('#tags');
+      if ($el.val() === '') {
+        return;
+      } else {
+        event.preventDefault();
+        setTags();
+      }
+    });
 
     fake.$.id.find('#clientId').focus();
+
+    $('.toggle-console').click(function(e){
+      e.preventDefault();
+      $('.content').toggleClass('col-md-12 col-md-8');
+      $('.console').toggleClass('hide col-md-4');
+      fake.map.invalidateSize();
+      $(this).find('i').toggleClass('fa-expand-o fa-collapse-o');
+    });
+
+    initMap();
   }
 
   function initDevice (event) {
@@ -70,7 +99,7 @@
 
     fake.device.session.on('authentication:error', function(){
       $el.removeAttr('disabled');
-      fake.$.device.find('.page-header small').text('Authentication Error');
+      fake.$.title.find('small').text('Authentication Error');
     });
 
     fake.device.session.queue(function(){
@@ -89,24 +118,20 @@
           .val(response.devices[0].tags.join(', '))
           .removeAttr('disabled')
           .attr('placeholder','tags');
+
+        fake.$.tags.find('.setTags').removeAttr('disabled');
       });
 
       fake.$.tags.removeClass('hide');
-      fake.$.device.find('.page-header').removeClass('hide');
-      fake.$.device.find('.page-header small').text('ID: ' + this.deviceId);
+      fake.$.update.removeClass('hide');
+      fake.$.title.find('small').text('device id: ' + this.deviceId);
 
-      initMap();
+      getTriggers();
     });
   }
 
-  function submitTags (event) {
-    var $el = $(this);
-
-    if ( (event.which !== 13) || ($el.val() === '') ) {
-      return;
-    }
-
-    event.preventDefault();
+  function setTags () {
+    var $el = fake.$.tags.find('#tags');
 
     var inputTags = $el.val().split(',');
     var tags = [];
@@ -142,7 +167,7 @@
       zoomControl: false
     });
 
-    new L.Control.Zoom({ position: 'topright' }).addTo(fake.map);
+    new L.Control.Zoom({ position: 'bottomleft' }).addTo(fake.map);
 
     L.tileLayer('http://mapattack-tiles-{s}.pdx.esri.com/dark/{z}/{y}/{x}', {
       maxZoom: 18,
@@ -154,7 +179,9 @@
 
     fake.map.addLayer(fake.triggers);
     fake.map.addLayer(fake.locations);
+  }
 
+  function getTriggers () {
     fake.device.session.request('trigger/list', function(error, response){
       var triggers = response.triggers;
 
@@ -206,7 +233,22 @@
       layer.addTo(fake.locations);
 
       sendUpdate(options, function(error, response){
-        console.log(error, response);
+        var html;
+
+        if (error) {
+          html = '<span class="label label-danger">Error @ ' + new Date().toLocaleTimeString() + '</span>';
+        } else {
+          html = '<span class="label label-success">Response @ ' + new Date().toLocaleTimeString() + '</span>';
+        }
+
+        var str = JSON.stringify(error || response, undefined, 2);
+        // output(str);
+        $('.console')
+          .stop(true,true)
+          .append($('<p>').html(html))
+          .append($('<pre>').html(str))
+          .animate({ scrollTop: $('.console')[0].scrollHeight}, 500);
+
         layer.setStyle({
           dashArray: null
         });
@@ -220,10 +262,22 @@
     });
 
 
-    fake.$.update.removeClass('hide');
+    fake.$.update.removeAttr('disabled');
   }
 
   function sendUpdate (options, callback) {
+    options = options || {};
+    options.trackingProfile = 'adaptive';
+    options.timestamp = new Date().toISOString();
+
+    var str = JSON.stringify({ locations: [options], token: fake.device.session.token }, undefined, 2);
+
+    $('.console')
+      .stop(true,true)
+      .append($('<p>').html('<span class="label label-info">Request @ ' + new Date().toLocaleTimeString() + '</span>'))
+      .append($('<pre>').html(str))
+      .animate({ scrollTop: $('.console')[0].scrollHeight}, 500);
+
     fake.device.send(options, function(error, response){
       if (error) {
         callback(error, null);
@@ -231,6 +285,25 @@
         callback(null, response);
       }
     });
+  }
+
+  function syntaxHighlight(json) {
+      json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+          var cls = 'number';
+          if (/^"/.test(match)) {
+              if (/:$/.test(match)) {
+                  cls = 'key';
+              } else {
+                  cls = 'string';
+              }
+          } else if (/true|false/.test(match)) {
+              cls = 'boolean';
+          } else if (/null/.test(match)) {
+              cls = 'null';
+          }
+          return '<span class="' + cls + '">' + match + '</span>';
+      });
   }
 
   $(init);

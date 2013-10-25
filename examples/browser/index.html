@@ -14,38 +14,43 @@
   <![endif]-->
 </head>
 <body>
-  <nav class="navbar navbar-default navbar-static-top" role="navigation">
+  <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
     <div class="navbar-header">
-       <a class="navbar-brand">Geofaker</a>
-     </div>
+      <div class="navbar-brand title"><i class="fa fa-mobile"></i> Geofaker <small></small></div>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+      <li>
+        <a class="toggle-console"><i class="fa fa-expand-o"></i> req/res</a>
+      </li>
+    </ul>
   </nav>
-  <div class="container">
 
-    <div class="device">
-      <div class="page-header hide">
-        <h2 class="title"><i class="fa fa-mobile"></i> Mobile Device <small></small></h2>
+  <div class="app-container row">
+    <div class="content col-md-12">
+
+      <div class="controls row">
+        <div class="client-id input-group col-md-12">
+          <span class="input-group-addon">Client ID</span>
+          <input class="form-control" id="clientId" type="text" placeholder="clientId" value="rcMNAPBoIn2M1JoI">
+        </div>
+
+        <div class="tags input-group hide col-md-8">
+          <span class="input-group-addon">Tags</span>
+          <input class="form-control" id="tags" type="text" placeholder="loading.." disabled>
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-info setTags" disabled>Update Tags</button>
+          </span>
+        </div>
+
+        <button type="button" class="btn btn-primary location-update hide col-md-4" disabled><i class="fa fa-location-arrow"></i> Send Location Update</button>
       </div>
 
-      <div class="client-id input-group">
-        <span class="input-group-addon">Client ID</span>
-        <input class="form-control" id="clientId" type="text" placeholder="clientId">
-      </div>
+      <div class="map-wrap hide">
 
-      <div class="tags input-group hide">
-        <span class="input-group-addon">Tags</span>
-        <input class="form-control" id="tags" type="text" placeholder="loading.." disabled>
+        <div id="map"></div>
       </div>
-
-      <!-- <div class="location input-group hide">
-        <span class="input-group-addon">Location Update</span>
-        <input class="form-control" id="location" type="text" placeholder="lat,lng">
-      </div> -->
     </div>
-
-    <div class="map-wrap hide">
-      <button type="button" class="btn btn-default location-update hide"><i class="fa fa-location-arrow"></i> Location Update</button>
-      <div id="map"></div>
-    </div>
+    <div class="console hide"></div>
   </div>
 
   <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
