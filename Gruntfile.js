@@ -24,13 +24,24 @@ module.exports = function(grunt) {
         ],
         dest: 'geofaker.js'
       }
+    },
+
+    // uglification for browser distribution
+    uglify: {
+      browser: {
+        files: {
+          'dist/browser/geofaker.min.js': ['dist/browser/geofaker.js']
+        }
+      }
     }
   });
 
   grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
 
   grunt.registerTask('default', [
     'concat:browser',
+    'uglify:browser',
     'concat:node'
   ]);
 
