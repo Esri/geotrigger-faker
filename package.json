@@ -10,8 +10,7 @@
   "author": "Nate Goldman <ngoldman@esri.com>",
   "license": "BSD",
   "dependencies": {
-    "xmlhttprequest": "~1.6.0",
-    "request": "~2.27.0"
+    "xmlhttprequest": "~1.6.0"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
