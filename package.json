@@ -1,7 +1,7 @@
 {
   "name": "geofaker",
-  "version": "0.0.0",
-  "description": "Make fake location updates for the Geotrigger API",
+  "version": "0.0.1",
+  "description": "Test device updates for the ArcGIS Geotrigger Service",
   "main": "geofaker.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,6 +15,7 @@
   },
   "devDependencies": {
     "grunt": "~0.4.1",
-    "grunt-contrib-concat": "~0.3.0"
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-uglify": "~0.2.4"
   }
 }
