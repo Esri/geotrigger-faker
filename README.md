@@ -4,9 +4,9 @@ Tiny utility to fake device updates when testing an application that uses the Ar
 
 ## API
 
-### `Geofaker()`
+### `Geofaker(options)`
 
-Constructor function to register a device.
+Constructor function to register a device. Expects `options` to be an object with a required `clientId` property.
 
 ```js
 var device = new Geofaker({ clientId: 'XXXXXX' });
@@ -14,7 +14,8 @@ var device = new Geofaker({ clientId: 'XXXXXX' });
 
 ### `.send(update, callback)`
 
-Method for spoofing device updates.
+Method for spoofing device updates. The `update` parameter can be a single location object,
+an array of location objects, or an array containing a latitude and longitude (i.e. `[0,0]`).
 
 ```js
 device.send({
@@ -31,6 +32,7 @@ device.send({
 ### `.setTags(tags, callback)`
 
 Method for setting tags a device is subscribed to. Smart enough to ignore the device's unique tag (prefix `device:`).
+Expects tags to be an array.
 
 ```js
 device.setTags(['mr','cool','ice'], function (error, response) {
