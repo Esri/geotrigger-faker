@@ -10,17 +10,24 @@ var faker = new Geofaker({
   clientId: clientId
 });
 
-console.log('sending location..');
+faker.session.on('authentication:error', function(){
+  console.log(arguments);
+  process.exit(1);
+});
 
-faker.send({
+var locationObject = {
   longitude: -122.716598510742,
   latitude: 45.5780033058926
-}, function(error, response){
+};
+
+console.log('attempting to send location object', locationObject);
+
+faker.send(locationObject, function(error, response){
   console.log('error:', error);
   console.log('response:', response);
 });
 
-faker.send([
+var locationObjects = [
   {
     longitude: -122.716598510742,
     latitude: 45.5780033058926
@@ -29,7 +36,11 @@ faker.send([
     longitude: -122.712478637695,
     latitude: 45.6022688149858
   }
-], function(error, response){
+];
+
+console.log('attempting to send location objects', locationObjects);
+
+faker.send(locationObjects, function(error, response){
   console.log('error:', error);
   console.log('response:', response);
 });
