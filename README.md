@@ -2,6 +2,30 @@
 
 Tiny utility to fake device updates when testing an application that uses the ArcGIS Geotrigger Service.
 
+## API
+
+### `Geofaker()`
+
+Constructor function to register a device.
+
+```js
+var geofaker = new Geofaker({ clientId: 'XXXXXX' });
+```
+
+### `.send(update, callback)`
+
+Method for spoofing device updates.
+
+```js
+geofaker.send({
+  latitude: 0,
+  longitude: 0,
+  accuracy: 10,
+  trackingProfile: 'adaptive',
+  timestamp: '2013-10-26T06:34:20.022Z'
+}, function (error, response) { /* do something here */ });
+```
+
 ## Usage
 
 ### Node.js
