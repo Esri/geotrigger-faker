@@ -27,8 +27,6 @@ faker.send(update, function(error, response) {
 
 ### Browser
 
-Geofaker.js depends on [geotriggers.js](https://github.com/esri/geotriggers-js).
-
 ```html
 <!doctype html>
 <html lang="en">
@@ -69,7 +67,11 @@ Location: `/geofaker.js` (root)
 
 Location: `/dist/browser/geofaker.js`
 
-Requires [geotriggers.js](https://github.com/esri/geotriggers-js).
+#### Notes
+
+Both distributions require a local copy of [geotriggers.js](https://github.com/esri/geotriggers-js).
+This dependency will be automatically included for node once both modules are published to npm,
+but you'll always need to include a copy of geotriggers.js when developing for browsers.
 
 ## Examples
 
@@ -81,7 +83,7 @@ Location: `/examples/browser/`
 
 The Geofaker web app can be used at [geoloqi.github.io/geofaker-js](http://geoloqi.github.io/geofaker-js/).
 
-### CLI
+### Command Line
 
 Location: `/examples/cli/cli.js`
 
@@ -90,6 +92,8 @@ Can be run with the following command, where XXXXXX is a valid Client ID:
 ```sh
 $ node examples/cli/cli.js XXXXXX
 ```
+
+Spits out response from a dummy update 
 
 ## Reference
 
