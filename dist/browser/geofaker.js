@@ -58,8 +58,7 @@ function Geofaker (options) {
 
   // fail loudly and leave if something critical is missing
   if (!options.clientId) {
-    console.log('Initialization Error: missing option "clientId"');
-    return null;
+    throw new Error('missing clientId');
   }
 
   // set things up
@@ -78,17 +77,12 @@ function Geofaker (options) {
 //
 Geofaker.prototype.setTags = function (tags, callback) {
 
-  var request = {
-    // 'deviceIds': [this.deviceId],
-    'setTags': tags
-  };
+  callback = typeof callback === 'function' ? callback : FNOP;
+
+  var request = { 'setTags': tags };
 
   this.session.queue(function(){
-    if (typeof callback === 'function') {
-      this.request('device/update', request, callback);
-    } else {
-      this.request('device/update', request, FNOP);
-    }
+    this.request('device/update', request, callback);
   });
 
   return this;
@@ -133,17 +127,24 @@ function isArray (obj) {
 function parseSendOptions (options) {
   var locations = [];
 
+  // options is a location object
   if ( isObject(options) ) {
     locations.push( buildLocationObject(options) );
   }
 
+  // options is an array of location objects
   else if ( isArray(options) && isObject(options[0]) ) {
     for (var i=0; i < options.length; i++) {
       locations.push( buildLocationObject(options[i]) );
     }
   }
 
-  else if ( isArray(options) && options.length === 2 && !isNaN(options[0]) && !isNaN(options[1]) ) {
+  // options is a [lat,lng] array
+  else if ( isArray(options) &&
+            options.length === 2 &&
+            !isNaN(options[0]) &&
+            !isNaN(options[1]) ) {
+
     locations.push( buildLocationObject({
       latitude: options[0],
       longitude: options[1]
@@ -151,7 +152,7 @@ function parseSendOptions (options) {
   }
 
   else {
-    throw new Error('invalid location options', options);
+    throw new Error('invalid location options');
   }
 
   return locations;
@@ -159,6 +160,7 @@ function parseSendOptions (options) {
 
 function buildLocationObject (locationObject) {
 
+  // merge defaults into locationObject
   for (var prop in defaults.locationObject) {
     if (defaults.locationObject.hasOwnProperty(prop)) {
       if (prop in locationObject) { continue; }
@@ -166,6 +168,7 @@ function buildLocationObject (locationObject) {
     }
   }
 
+  // provide a timestamp if it's missing
   if (typeof locationObject.timestamp === 'undefined') {
     var date = new Date();
     locationObject.timestamp = date.toISOString();
@@ -177,16 +180,12 @@ function buildLocationObject (locationObject) {
 
 function sendLocationUpdate (locations, callback) {
 
+  callback = typeof callback === 'function' ? callback : FNOP;
+
   // send locations to `location/update` using Geofaker's device ID
-  if (typeof callback === 'function') {
-    this.session.queue(function(){
-      this.request('location/update', locations, callback);
-    });
-  } else {
-    this.session.queue(function(){
-      this.request('location/update', locations, FNOP);
-    });
-  }
+  this.session.queue(function(){
+    this.request('location/update', locations, callback);
+  });
 
 }
 
