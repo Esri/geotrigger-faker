@@ -9,7 +9,7 @@ Tiny utility to fake device updates when testing an application that uses the Ar
 Constructor function to register a device.
 
 ```js
-var geofaker = new Geofaker({ clientId: 'XXXXXX' });
+var device = new Geofaker({ clientId: 'XXXXXX' });
 ```
 
 ### `.send(update, callback)`
@@ -17,13 +17,25 @@ var geofaker = new Geofaker({ clientId: 'XXXXXX' });
 Method for spoofing device updates.
 
 ```js
-geofaker.send({
+device.send({
   latitude: 0,
   longitude: 0,
   accuracy: 10,
   trackingProfile: 'adaptive',
   timestamp: '2013-10-26T06:34:20.022Z'
-}, function (error, response) { /* do something here */ });
+}, function (error, response) {
+  /* do something here */
+});
+```
+
+### `.setTags(tags, callback)`
+
+Method for setting tags a device is subscribed to. Smart enough to ignore the device's unique tag (prefix `device:`).
+
+```js
+device.setTags(['mr','cool','ice'], function (error, response) {
+  /* do something here */
+});
 ```
 
 ## Usage
@@ -117,7 +129,8 @@ Can be run with the following command, where XXXXXX is a valid Client ID:
 $ node examples/cli/cli.js XXXXXX
 ```
 
-Spits out response from a dummy update 
+Console logs a response from a dummy location update supplied in the script.
+A quick way to ensure the library is working and the client ID is valid.
 
 ## Reference
 
