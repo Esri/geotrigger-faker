@@ -75,6 +75,7 @@
       $('.console').toggleClass('hide col-md-4');
       fake.map.invalidateSize();
       $(this).find('i').toggleClass('fa-expand-o fa-collapse-o');
+      $(this).find('.label').text('0').addClass('hide');
     });
 
     initMap();
@@ -249,6 +250,14 @@
           .append($('<pre>').html(str))
           .animate({ scrollTop: $('.console')[0].scrollHeight}, 500);
 
+        if ( $('.console').hasClass('hide') ) {
+          var $el = $('.toggle-console .label');
+          var count = parseInt($el.text(), 10);
+          count++;
+          $el.text(count);
+          $el.removeClass('hide');
+        }
+
         layer.setStyle({
           dashArray: null
         });
@@ -277,6 +286,14 @@
       .append($('<p>').html('<span class="label label-info">Request @ ' + new Date().toLocaleTimeString() + '</span>'))
       .append($('<pre>').html(str))
       .animate({ scrollTop: $('.console')[0].scrollHeight}, 500);
+
+    if ( $('.console').hasClass('hide') ) {
+      var $el = $('.toggle-console .label');
+      var count = parseInt($el.text(), 10);
+      count++;
+      $el.text(count);
+      $el.removeClass('hide');
+    }
 
     fake.device.send(options, function(error, response){
       if (error) {
