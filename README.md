@@ -84,7 +84,7 @@ faker.send(update, function(error, response) {
       longitude: -122.716598510742, // required
       latitude: 45.5780033058926, // required
       accuracy: 10.0, // optional, defaults to 10.0
-      trackingProfile: 'adaptive' // optional, default to 'adaptive'
+      trackingProfile: 'adaptive' // optional, defaults to 'adaptive'
     };
 
     faker.send(update, function(error, response) {
