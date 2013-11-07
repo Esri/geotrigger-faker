@@ -164,16 +164,12 @@
       center: [0,0],
       zoom: 1,
       scrollWheelZoom: true,
-      attributionControl: false,
       zoomControl: false
     });
 
     new L.Control.Zoom({ position: 'bottomleft' }).addTo(fake.map);
 
-    L.tileLayer('http://mapattack-tiles-{s}.pdx.esri.com/dark/{z}/{y}/{x}', {
-      maxZoom: 18,
-      subdomains: '0123'
-    }).addTo(fake.map);
+    L.esri.basemapLayer('Streets').addTo(fake.map);
 
     fake.triggers = new L.FeatureGroup();
     fake.locations = new L.FeatureGroup();
