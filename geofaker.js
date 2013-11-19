@@ -1,3 +1,8 @@
+/*! geofaker - v0.1.0 - 2013-11-19
+*   https://github.com/Esri/geofaker-js
+*   Copyright (c) 2013 Environmental Systems Research Institute, Inc.
+*   Apache 2.0 License */
+
 var Geotrigger = require('geotrigger-js');
 
 // polyfills
