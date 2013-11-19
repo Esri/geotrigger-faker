@@ -209,10 +209,12 @@
 
       var bounds = faker.triggers.getBounds();
 
-      faker.map.fitBounds(bounds, {
-        animate: false,
-        paddingTopLeft: [0, 0]
-      });
+      if (bounds.isValid()) {
+        faker.map.fitBounds(bounds, {
+          animate: false,
+          paddingTopLeft: [0, 0]
+        });
+      }
 
       initDraw();
     });

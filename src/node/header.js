@@ -1,1 +1,1 @@
-var Geotriggers = require('./lib/geotriggers');
+var Geotrigger = require('./lib/geotrigger');

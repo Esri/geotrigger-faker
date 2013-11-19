@@ -61,7 +61,7 @@ function Geofaker (options) {
 
   // set things up
   this.clientId = options.clientId;
-  this.session = new Geotriggers.Session({ clientId: this.clientId });
+  this.session = new Geotrigger.Session({ clientId: this.clientId });
   this._sendQueue = [];
 
   return this;
