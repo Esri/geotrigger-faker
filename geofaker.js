@@ -1,4 +1,4 @@
-var Geotrigger = require('./lib/geotrigger');
+var Geotrigger = require('geotrigger-js');
 
 // polyfills
 // ---------
