@@ -107,9 +107,9 @@ Location: `/dist/browser/geofaker.js`
 
 #### Notes
 
-Both distributions require a local copy of [geotriggers.js](https://github.com/esri/geotriggers-js).
+Both distributions require a local copy of [geotrigger.js](https://github.com/esri/geotrigger-js).
 This dependency will be automatically included for node once both modules are published to npm,
-but you'll always need to include a copy of geotriggers.js when developing for browsers.
+but you'll always need to include a copy of geotrigger.js when developing for browsers.
 
 ## Examples
 
@@ -141,4 +141,4 @@ A quick way to ensure the library is working and the client ID is valid.
 ## Todo
 
 * Tests
-* Remove [geotriggers.js](https://github.com/esri/geotriggers-js) from `lib/` (once it's published on npm)
+* Remove [geotrigger.js](https://github.com/esri/geotrigger-js) from `lib/` (once it's published on npm)
