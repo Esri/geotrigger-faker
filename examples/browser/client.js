@@ -170,7 +170,7 @@
 
     faker.map = L.map('map', {
       center: [0,0],
-      zoom: 1,
+      zoom: 2,
       scrollWheelZoom: true,
       zoomControl: false
     });

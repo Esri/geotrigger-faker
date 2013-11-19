@@ -2,9 +2,16 @@
 
 Tiny utility to fake device updates when testing an application that uses the ArcGIS Geotrigger Service.
 
-## API
+## Features
 
-### `Geofaker(options)`
+* Register a new device using a a valid ArcGIS Client ID
+* Send location updates to test against existing Geotrigger rules
+
+## Instructions
+
+### API
+
+#### `Geofaker(options)`
 
 Constructor function to register a device. Expects `options` to be an object with a required `clientId` property.
 
@@ -12,7 +19,7 @@ Constructor function to register a device. Expects `options` to be an object wit
 var device = new Geofaker({ clientId: 'XXXXXX' });
 ```
 
-### `.send(update, callback)`
+#### `.send(update, callback)`
 
 Method for spoofing device updates. The `update` parameter can be a single location object,
 an array of location objects, or an array containing a latitude and longitude (i.e. `[0,0]`).
@@ -29,7 +36,7 @@ device.send({
 });
 ```
 
-### `.setTags(tags, callback)`
+#### `.setTags(tags, callback)`
 
 Method for setting tags a device is subscribed to. Smart enough to ignore the device's unique tag (prefix `device:`).
 Expects tags to be an array.
@@ -40,9 +47,9 @@ device.setTags(['mr','cool','ice'], function (error, response) {
 });
 ```
 
-## Usage
+### Usage
 
-### Node.js
+#### Node.js
 
 ```js
 var Geofaker = require('geofaker');
@@ -63,7 +70,7 @@ faker.send(update, function(error, response) {
 });
 ```
 
-### Browser
+#### Browser
 
 ```html
 <!doctype html>
@@ -95,25 +102,24 @@ faker.send(update, function(error, response) {
 </html>
 ```
 
-## Distributions
+### Distributions
 
-### Node.js
+#### Node.js
 
 Location: `/geofaker.js` (root)
 
-### Browser
+#### Browser
 
 Location: `/dist/browser/geofaker.js`
 
-#### Notes
+##### Notes
 
-Both distributions require a local copy of [geotrigger.js](https://github.com/esri/geotrigger-js).
-This dependency will be automatically included for node once both modules are published to npm,
-but you'll always need to include a copy of geotrigger.js when developing for browsers.
+Both distributions depend on [geotrigger.js](https://github.com/esri/geotrigger-js).
+You'll always need to include a copy of geotrigger.js when developing for browsers.
 
-## Examples
+### Examples
 
-### Geofaker Web Application
+#### Geofaker Web Application
 
 A full-fledged client-side device location faker.
 
@@ -121,7 +127,7 @@ Location: `/examples/browser/`
 
 The Geofaker web app can be used at [geoloqi.github.io/geofaker-js](http://geoloqi.github.io/geofaker-js/).
 
-### Command Line
+#### Command Line
 
 Location: `/examples/cli/cli.js`
 
@@ -134,11 +140,39 @@ $ node examples/cli/cli.js XXXXXX
 Console logs a response from a dummy location update supplied in the script.
 A quick way to ensure the library is working and the client ID is valid.
 
-## Reference
+#### Reference
 
 * [location objects](http://esri.github.io/geotrigger-docs/api/location/update/)
 
-## Todo
+#### Todo
 
 * Tests
-* Remove [geotrigger.js](https://github.com/esri/geotrigger-js) from `lib/` (once it's published on npm)
+
+## Issues
+
+Find a bug or want to request a new feature? Please let us know by submitting an [issue](https://github.com/geoloqi/geotrigger-editor/issues).
+
+## Contributing
+
+Esri welcomes contributions from anyone and everyone. Please see our [guidelines for contributing](https://github.com/esri/contributing).
+
+## Licensing
+
+Copyright 2013 Esri
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+A copy of the license is available in the repository's license.txt file.
+
+[](Esri Tags: Geotrigger Device Test Testing Location Geolocation)
+[](Esri Language: JavaScript Node.js)
