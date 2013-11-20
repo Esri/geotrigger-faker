@@ -1,5 +1,7 @@
 (function (window, undefined) {
 
+  var CORS = !!(window.XMLHttpRequest && 'withCredentials' in new XMLHttpRequest());
+
   var faker = {
     $: {},
     device: null,
@@ -34,6 +36,15 @@
   });
 
   function init () {
+
+    if (CORS) {
+      $('.toggle-console').removeClass('hide');
+      $('.controls').removeClass('hide');
+    } else {
+      $('.jumbotron').removeClass('hide');
+      return;
+    }
+
     faker.$.update = $('.location-update');
     faker.$.map    = $('.map-wrap');
     faker.$.id     = $('.client-id');

@@ -2,10 +2,12 @@
 
 Tiny utility to fake device updates when testing an application that uses the ArcGIS Geotrigger Service.
 
+You can visit the [demo](http://esri.github.io/geofaker-js) (only works in browsers with CORS support).
+
 ## Features
 
-* Register a new device using a a valid ArcGIS Client ID
-* Send location updates to test against existing Geotrigger rules
+* Register a new device using a valid ArcGIS Client ID
+* Send location updates to test existing Geotrigger rules
 
 ## Instructions
 
@@ -71,6 +73,8 @@ faker.send(update, function(error, response) {
 ```
 
 #### Browser
+
+Geofaker.js relies on [Geotrigger.js](http://github.com/esri/geotrigger-js), which requires CORS support or a server-side proxy when running in a browser. Read more about browser support [here](https://github.com/Esri/geotrigger-js#browser-support).
 
 ```html
 <!doctype html>
