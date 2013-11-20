@@ -16,10 +16,10 @@
 <body>
   <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
     <div class="navbar-header">
-      <div class="navbar-brand title"><i class="fa fa-mobile"></i> Geofaker <small></small></div>
+      <div class="navbar-brand title"><i class="fa fa-mobile"></i> <a href="http://github.com/esri/geofaker-js">Geofaker</a> <small></small></div>
     </div>
     <div class="collapse navbar-collapse navbar-ex4-collapse">
-      <p class="navbar-text pull-right toggle-console">
+      <p class="hide navbar-text pull-right toggle-console">
         <i class="fa fa-expand-o"></i> req/res
         <span class="label label-danger hide">0</span>
       </p>
@@ -28,8 +28,11 @@
 
   <div class="app-container row">
     <div class="content col-md-12">
+      <div class="hide jumbotron warning">
+        <p>This application requires a browser with <a href="http://caniuse.com/cors">CORS</a> support. You can either use a newer browser or host the application yourself using a <a href="https://github.com/Esri/geofaker-js#browser">proxy</a>.</p>
+      </div>
 
-      <div class="controls row">
+      <div class="hide controls row">
         <div class="client-id input-group col-md-12">
           <span class="input-group-addon">Client ID</span>
           <input class="form-control" id="clientId" type="text" placeholder="clientId">
