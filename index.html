@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Geofaker</title>
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css">
+  <link rel="stylesheet" href="leaflet.draw.css">
+  <link rel="stylesheet" href="style.css">
+  <!--[if lte IE 8]>
+      <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.ie.css">
+      <link rel="stylesheet" href="leaflet.draw.ie.css">
+  <![endif]-->
+</head>
+<body>
+  <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+    <div class="navbar-header">
+      <div class="navbar-brand title"><i class="fa fa-mobile"></i> <a href="http://github.com/esri/geofaker-js">Geofaker</a> <small></small></div>
+    </div>
+    <div class="collapse navbar-collapse navbar-ex4-collapse">
+      <p class="hide navbar-text pull-right toggle-console">
+        <i class="fa fa-expand-o"></i> req/res
+        <span class="label label-danger hide">0</span>
+      </p>
+    </div>
+  </nav>
+
+  <div class="app-container row">
+    <div class="content col-md-12">
+      <div class="hide jumbotron warning">
+        <p>This application requires a browser with <a href="http://caniuse.com/cors">CORS</a> support. You can either use a newer browser or host the application yourself using a <a href="https://github.com/Esri/geofaker-js#browser">proxy</a>.</p>
+      </div>
+
+      <div class="hide controls row">
+        <div class="client-id input-group col-md-12">
+          <span class="input-group-addon">Client ID</span>
+          <input class="form-control" id="clientId" type="text" placeholder="clientId">
+        </div>
+
+        <div class="tags input-group hide col-md-8">
+          <span class="input-group-addon">Tags</span>
+          <input class="form-control" id="tags" type="text" placeholder="loading.." disabled>
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-info setTags" disabled>Update Tags</button>
+          </span>
+        </div>
+
+        <button type="button" class="btn btn-primary location-update hide col-md-4" disabled><i class="fa fa-location-arrow"></i> Send Location Update</button>
+      </div>
+
+      <div class="map-wrap hide">
+
+        <div id="map"></div>
+      </div>
+    </div>
+    <div class="console hide"></div>
+  </div>
+
+  <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+  <script src="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"></script>
+  <script src="leaflet.draw.js"></script>
+  <script src="http://esri.github.io/esri-leaflet/lib/esri-leaflet/esri-leaflet.js"></script>
+  <script src="geotrigger.min.js"></script>
+  <script src="geofaker.min.js"></script>
+
+  <script src="client.js"></script>
+</body>
+</html>
