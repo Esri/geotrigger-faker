@@ -27,18 +27,26 @@
   </nav>
 
   <div class="app-container row">
-    <div class="content col-md-12">
+    <div class="content col-md-12 col-sm-12">
       <div class="hide jumbotron warning">
         <p>This application requires a browser with <a href="http://caniuse.com/cors">CORS</a> support. You can either use a newer browser or host the application yourself using a <a href="https://github.com/Esri/geofaker-js#browser">proxy</a>.</p>
       </div>
 
       <div class="hide controls row">
-        <div class="client-id input-group col-md-12">
-          <span class="input-group-addon">Client ID</span>
-          <input class="form-control" id="clientId" type="text" placeholder="clientId">
-        </div>
 
-        <div class="tags input-group hide col-md-8">
+        <form class="device-form">
+          <div class="input-group col-md-12 col-sm-12 col-xs-12">
+            <span class="input-group-addon">Client ID</span>
+            <input class="form-control" id="clientId" type="text" placeholder="required - press enter when ready">
+          </div>
+
+          <div class="input-group col-md-12 col-sm-12 col-xs-12">
+            <span class="input-group-addon">Refresh Token</span>
+            <input class="form-control" id="refreshToken" type="text" placeholder="optional - include this if you want to use an existing device">
+          </div>
+        </form>
+
+        <div class="tags input-group hide col-md-8 col-sm-8 col-xs-12">
           <span class="input-group-addon">Tags</span>
           <input class="form-control" id="tags" type="text" placeholder="loading.." disabled>
           <span class="input-group-btn">
@@ -46,7 +54,7 @@
           </span>
         </div>
 
-        <button type="button" class="btn btn-primary location-update hide col-md-4" disabled><i class="fa fa-location-arrow"></i> Send Location Update</button>
+        <button type="button" class="btn btn-primary location-update hide col-md-4 col-sm-4 col-xs-12" disabled><i class="fa fa-location-arrow"></i> Send Location Update</button>
       </div>
 
       <div class="map-wrap hide">

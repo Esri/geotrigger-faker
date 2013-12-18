@@ -1,6 +1,6 @@
 {
   "name": "geofaker",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Fake device location updates for the ArcGIS Geotrigger Service",
   "homepage": "https://github.com/Esri/geofaker-js",
   "main": "geofaker.js",
@@ -11,7 +11,7 @@
   "author": "Nate Goldman <ngoldman@esri.com>",
   "license": "Apache 2.0",
   "dependencies": {
-    "geotrigger-js": "~0.1.2"
+    "geotrigger-js": "~0.1.4"
   },
   "devDependencies": {
     "grunt": "~0.4.1",

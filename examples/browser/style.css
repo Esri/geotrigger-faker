@@ -30,7 +30,7 @@ html, body {
   bottom: 0;
   left: 0;
 }
-@media (max-width: 991px) {
+@media (max-width: 768px) {
   .content {
     right: 0;
   }
@@ -67,10 +67,17 @@ html, body {
 }
 .controls .input-group {
   padding: 0;
+  margin-bottom: 10px;
 }
 .controls .tags {
   padding-bottom: 10px;
   padding-right: 10px;
+}
+@media (max-width: 768px) {
+  .controls .tags {
+    padding-bottom: 0;
+    padding-right: 0;
+  }
 }
 .toggle-console {
   cursor: pointer;
