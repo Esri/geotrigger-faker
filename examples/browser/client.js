@@ -47,7 +47,7 @@
 
     faker.$.update = $('.location-update');
     faker.$.map    = $('.map-wrap');
-    faker.$.id     = $('.client-id');
+    faker.$.form   = $('.device-form');
     faker.$.tags   = $('.tags');
     faker.$.title  = $('.title');
 
@@ -56,7 +56,7 @@
       longitude: -176.645
     };
 
-    faker.$.id.on('keypress', '#clientId', initDevice);
+    faker.$.form.on('keypress', initDevice);
 
     faker.$.tags.on('keypress', '#tags', function(event){
       var $el = $(this);
@@ -78,7 +78,7 @@
       }
     });
 
-    faker.$.id.find('#clientId').focus();
+    faker.$.form.find('#clientId').focus();
 
     $('.toggle-console').click(toggleConsole);
 
@@ -90,8 +90,8 @@
 
     var $el = $(this);
 
-    $('.content').toggleClass('col-md-12 col-md-8');
-    $('.console').toggleClass('hide col-md-4');
+    $('.content').toggleClass('col-md-12 col-sm-12 col-md-8 col-sm-8');
+    $('.console').toggleClass('hide col-md-4 col-sm-4');
 
     faker.map.invalidateSize();
 
@@ -101,51 +101,47 @@
 
   function initDevice (event) {
     var $el = $(this);
+    var $clientId = $el.find('#clientId');
 
-    if ( (event.which !== 13) || ($el.val() === '') ) {
+    if ( (event.which !== 13) || ($clientId.val() === '') ) {
       return;
     }
 
     event.preventDefault();
 
-    var clientId = $el.val();
+    var clientId = $clientId.val();
+    var refreshToken = $el.find('#refreshToken').val();
 
-    $el.attr('disabled','disabled');
-
-    faker.device = new Geofaker({
+    var options = {
       clientId: clientId
-    });
+    };
+
+    if (!!refreshToken && refreshToken !== '') {
+      options.refreshToken = refreshToken;
+    }
+
+    $el.find('input').attr('disabled','disabled');
+
+    faker.device = new Geofaker(options);
 
     faker.device.session.on('authentication:error', function(){
       $el.removeAttr('disabled');
       faker.$.title.find('small').text('Authentication Error');
     });
 
-    faker.device.session.queue(function(){
-      if (!this.deviceId) {
-        console.error('missing deviceId');
-        return;
-      }
+    faker.device.session.on('device:ready', function(){
+      faker.$.form.remove();
 
-      faker.$.id.remove();
+      faker.$.tags.find('#tags')
+        .val(faker.device.tags.join(', '))
+        .removeAttr('disabled')
+        .attr('placeholder','tags');
 
-      faker.device.session.request('device/list', function(error, response){
-        if (error) {
-          console.error(error);
-          return;
-        }
-
-        faker.$.tags.find('#tags')
-          .val(response.devices[0].tags.join(', '))
-          .removeAttr('disabled')
-          .attr('placeholder','tags');
-
-        faker.$.tags.find('.setTags').removeAttr('disabled');
-      });
+      faker.$.tags.find('.setTags').removeAttr('disabled');
 
       faker.$.tags.removeClass('hide');
       faker.$.update.removeClass('hide');
-      faker.$.title.find('small').text('device id: ' + this.deviceId);
+      faker.$.title.find('small').text('device id: ' + faker.device.deviceId);
 
       getTriggers();
     });

@@ -1,9 +1,9 @@
-/*! geofaker - v0.1.1 - 2013-11-19
+/*! geofaker - v0.2.0 - 2013-12-18
 *   https://github.com/Esri/geofaker-js
 *   Copyright (c) 2013 Environmental Systems Research Institute, Inc.
 *   Apache 2.0 License */
 
-(function(window, undefined){
+(function(window){
 
 // polyfills
 // ---------
@@ -57,18 +57,42 @@ defaults.locationObject = {
 // constructor
 // -----------
 //
-// usage: var faker = new Geofaker({ clientId: 'XXXXXX' });
+// usage: var faker = new Geofaker(options);
+//
+// `options` is an object with a required clientId param and optional refreshToken param
 //
 function Geofaker (options) {
 
   // fail loudly and leave if something critical is missing
-  if (!options.clientId) {
+  if (!options || !options.clientId) {
     throw new Error('missing clientId');
   }
 
   // set things up
-  this.clientId = options.clientId;
-  this.session = new Geotrigger.Session({ clientId: this.clientId });
+  var settings = {};
+  settings.clientId = this.clientId = options.clientId;
+  settings.persistSession = false;
+
+  // allow an existing device to be mimicked if a refresh token is provided
+  if (options.refreshToken) {
+    settings.refreshToken = this.refreshToken = options.refreshToken;
+  }
+
+  this.session = new Geotrigger.Session(settings);
+
+  var self = this;
+
+  this.session.queue(function(){
+    this.request('device/list', function(error, response){
+      // attach deviceId and tags to device object
+      self.deviceId = response.devices[0].deviceId;
+      self.tags = response.devices[0].tags;
+
+      // emit device:ready event to allow users to attach a function
+      self.session.emit('device:ready');
+    });
+  });
+
   this._sendQueue = [];
 
   return this;
