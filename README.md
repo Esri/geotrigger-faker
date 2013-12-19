@@ -21,6 +21,17 @@ Constructor function to register a device. Expects `options` to be an object wit
 var device = new Geofaker({ clientId: 'XXXXXX' });
 ```
 
+You can also include an optional `refreshToken` property if you want to use an existing device.
+
+```js
+var device = new Geofaker({
+  clientId: 'XXXXXX',
+  refreshToken: 'XXXXXX'
+});
+```
+
+A new session will be created using the [geotrigger.js](https://github.com/Esri/geotrigger-js) `Session` constructor and is made available as `.session` (so in the case of the example, it would be available as `device.session`). The session will also emit a `device:ready` event when the `deviceId` and `tags` have been attached to the device object.
+
 #### `.send(update, callback)`
 
 Method for spoofing device updates. The `update` parameter can be a single location object,
