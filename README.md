@@ -158,7 +158,7 @@ A full-fledged client-side device location faker.
 
 Location: `/examples/browser/`
 
-The Geofaker web app can be used at [esri.github.io/geofaker-js](http://geoloqi.github.io/geofaker-js/).
+The Geofaker web app can be used at [esri.github.io/geofaker-js](http://esri.github.io/geofaker-js/).
 
 #### Command Line
 
