@@ -65,6 +65,7 @@ function Geofaker (options) {
   var settings = {};
   settings.clientId = this.clientId = options.clientId;
   settings.persistSession = false;
+  settings.proxy = options.proxy || false;
 
   // allow an existing device to be mimicked if a refresh token is provided
   if (options.refreshToken) {

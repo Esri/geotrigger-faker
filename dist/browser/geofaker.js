@@ -1,4 +1,4 @@
-/*! geofaker - v0.2.0 - 2013-12-18
+/*! geofaker - v0.2.1 - 2013-12-31
 *   https://github.com/Esri/geofaker-js
 *   Copyright (c) 2013 Environmental Systems Research Institute, Inc.
 *   Apache 2.0 License */
@@ -72,6 +72,7 @@ function Geofaker (options) {
   var settings = {};
   settings.clientId = this.clientId = options.clientId;
   settings.persistSession = false;
+  settings.proxy = options.proxy || false;
 
   // allow an existing device to be mimicked if a refresh token is provided
   if (options.refreshToken) {

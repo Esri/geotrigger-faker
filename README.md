@@ -18,17 +18,16 @@ You can visit the [demo](http://esri.github.io/geofaker-js) (only works in brows
 Constructor function to register a device. Expects `options` to be an object with a required `clientId` property.
 
 ```js
-var device = new Geofaker({ clientId: 'XXXXXX' });
-```
-
-You can also include an optional `refreshToken` property if you want to use an existing device. See the [refresh token section](#refresh-token) below for details on how to retrieve that information from a device.
-
-```js
 var device = new Geofaker({
-  clientId: 'XXXXXX',
-  refreshToken: 'XXXXXX'
+  clientId: 'XXXXXX',      // required
+  refreshToken: 'XXXXXXX', // optional
+  proxy: '/path/to/proxy'  // optional
 });
 ```
+
+You can include an optional `refreshToken` property if you want to use an existing device. See the [refresh token section](#refresh-token) below for details on how to retrieve that information from a device.
+
+If you need to use a proxy to support older browsers, you can supply the path to your proxy with the `proxy` property. See the section on [browser support](https://github.com/Esri/geotrigger-js#browser-support) in the Geotrigger.js README for more information.
 
 A new session will be created using the [geotrigger.js](https://github.com/Esri/geotrigger-js) `Session` constructor and is made available as `.session` (so in the case of the example, it would be available as `device.session`). The session will also emit a `device:ready` event when the `deviceId` and `tags` have been attached to the device object.
 
@@ -42,11 +41,11 @@ Setting the log level in the iOS SDK, put this line anywhere **before** your cal
 ```
 The following (or something similar, depending on whether your device was registered previously or not) will show up in your Console as one of the first things after calling `setupWithClientId`:
 ```
-2013-12-20 15:19:54.786 [DEBUG  ][AGSGTDevice setClientId:withCompletion:]: Loaded device from disk: { 
-  clientId:'XXXX', 
-  deviceId:'YYYY', 
-  accessToken:'ZZZZ', 
-  refreshToken:'AAAA' 
+2013-12-20 15:19:54.786 [DEBUG  ][AGSGTDevice setClientId:withCompletion:]: Loaded device from disk: {
+  clientId:'XXXX',
+  deviceId:'YYYY',
+  accessToken:'ZZZZ',
+  refreshToken:'AAAA'
 }
 ```
 
