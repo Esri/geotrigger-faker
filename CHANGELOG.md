@@ -1,5 +1,8 @@
 # Geofaker.js Changelog
 
+## master
+* fix circle rendering in browser example (test for distance before geojson)
+
 ## v0.2.1
 * Add proxy support ([#27](https://github.com/Esri/geofaker-js/issues/27))
 * Bump geotrigger.js to v0.1.5 to fix auth timeout ([#28](https://github.com/Esri/geofaker-js/issues/28))
