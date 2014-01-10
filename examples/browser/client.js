@@ -197,18 +197,21 @@
     faker.device.session.request('trigger/list', function(error, response){
       var triggers = response.triggers;
 
+      function getShapeOptions (feature) {
+        return shapeOptions;
+      }
+
       for (var i = 0; i < triggers.length; i++) {
         if (triggers[i].condition && triggers[i].condition.geo) {
           var geo = triggers[i].condition.geo;
           var layer;
-          if (geo.geojson) {
-            layer = new L.GeoJSON(geo.geojson, {
-              style: function(feature) {
-                return shapeOptions;
-              }
-            });
-          } else if (geo.distance) {
+          if (geo.distance) {
             layer = new faker.Circle([geo.latitude, geo.longitude], geo.distance);
+          }
+          else if (geo.geojson) {
+            layer = new L.GeoJSON(geo.geojson, {
+              style: getShapeOptions
+            });
           }
           layer.bindPopup('tags: ' + triggers[i].tags.join(', ')).addTo(faker.triggers);
         }
@@ -256,7 +259,7 @@
         }
 
         var str = JSON.stringify(error || response, undefined, 2);
-        // output(str);
+
         $('.console')
           .stop(true,true)
           .append($('<p>').html(html))
@@ -282,7 +285,6 @@
       faker.tools.radius.enable();
       faker.$.update.attr('disabled','disabled');
     });
-
 
     faker.$.update.removeAttr('disabled');
   }
