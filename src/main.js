@@ -1,10 +1,3 @@
-/*! geofaker - v0.2.1 - 2013-12-31
-*   https://github.com/Esri/geofaker-js
-*   Copyright (c) 2013 Environmental Systems Research Institute, Inc.
-*   Apache 2.0 License */
-
-var Geotrigger = require('geotrigger-js');
-
 // polyfills
 // ---------
 
@@ -51,17 +44,17 @@ defaults.locationObject = {
   trackingProfile: 'adaptive'
 };
 
-// geofaker api (public)
+// Faker api (public)
 // ---------------------
 
 // constructor
 // -----------
 //
-// usage: var faker = new Geofaker(options);
+// usage: var faker = new Geotrigger.Faker(options);
 //
 // `options` is an object with a required clientId param and optional refreshToken param
 //
-function Geofaker (options) {
+function Faker (options) {
 
   // fail loudly and leave if something critical is missing
   if (!options || !options.clientId) {
@@ -105,7 +98,7 @@ function Geofaker (options) {
 //
 // accepts an array of tags and a callback function
 //
-Geofaker.prototype.setTags = function (tags, callback) {
+Faker.prototype.setTags = function (tags, callback) {
 
   callback = typeof callback === 'function' ? callback : FNOP;
 
@@ -133,7 +126,7 @@ Geofaker.prototype.setTags = function (tags, callback) {
 //
 // callback is optional
 //
-Geofaker.prototype.send = function (options, callback) {
+Faker.prototype.send = function (options, callback) {
 
   var locations = parseSendOptions(options);
 
@@ -212,11 +205,9 @@ function sendLocationUpdate (locations, callback) {
 
   callback = typeof callback === 'function' ? callback : FNOP;
 
-  // send locations to `location/update` using Geofaker's device ID
+  // send locations to `location/update` using Faker's device ID
   this.session.queue(function(){
     this.request('location/update', locations, callback);
   });
 
 }
-
-module.exports = Geofaker;

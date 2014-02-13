@@ -1,16 +1,16 @@
 // usage: node cli.js CLIENT_ID
 
-var Geofaker = require('../../geofaker');
+var Faker = require('../../geotrigger-faker');
 
 var options = process.argv.slice(2);
 
 var clientId = options[0];
 
-var faker = new Geofaker({
+var device = new Faker({
   clientId: clientId
 });
 
-faker.session.on('authentication:error', function(){
+device.session.on('authentication:error', function(){
   console.log(arguments);
   process.exit(1);
 });
@@ -22,7 +22,7 @@ var locationObject = {
 
 console.log('attempting to send location object', locationObject);
 
-faker.send(locationObject, function(error, response){
+device.send(locationObject, function(error, response){
   console.log('error:', error);
   console.log('response:', response);
 });
@@ -40,7 +40,7 @@ var locationObjects = [
 
 console.log('attempting to send location objects', locationObjects);
 
-faker.send(locationObjects, function(error, response){
+device.send(locationObjects, function(error, response){
   console.log('error:', error);
   console.log('response:', response);
 });
