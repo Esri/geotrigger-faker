@@ -1,1 +1,1 @@
-module.exports = Geofaker;
+module.exports = Faker;

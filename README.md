@@ -1,8 +1,8 @@
-# Geofaker.js
+# Geotrigger Faker
 
-Tiny utility to fake device updates when testing an application that uses the ArcGIS Geotrigger Service.
+Tiny javascript utility to fake device updates when testing an application that uses the ArcGIS Geotrigger Service.
 
-You can visit the [demo](http://esri.github.io/geofaker-js) (only works in browsers with CORS support).
+You can visit the [demo](http://esri.github.io/geotrigger-faker) (only works in browsers with CORS support).
 
 ## Features
 
@@ -13,12 +13,12 @@ You can visit the [demo](http://esri.github.io/geofaker-js) (only works in brows
 
 ### API
 
-#### `Geofaker(options)`
+#### `Geotrigger.Faker(options)`
 
 Constructor function to register a device. Expects `options` to be an object with a required `clientId` property.
 
 ```js
-var device = new Geofaker({
+var device = new Geotrigger.Faker({
   clientId: 'XXXXXX',      // required
   refreshToken: 'XXXXXXX', // optional
   proxy: '/path/to/proxy'  // optional
@@ -82,9 +82,9 @@ device.setTags(['mr','cool','ice'], function (error, response) {
 #### Node.js
 
 ```js
-var Geofaker = require('geofaker');
+var Geotrigger.Faker = require('geotrigger-faker');
 
-var faker = new Geofaker({
+var faker = new Geotrigger.Faker({
   clientId: 'XXXXXX'
 });
 
@@ -102,20 +102,20 @@ faker.send(update, function(error, response) {
 
 #### Browser
 
-Geofaker.js relies on [Geotrigger.js](http://github.com/esri/geotrigger-js), which requires CORS support or a server-side proxy when running in a browser. Read more about browser support [here](https://github.com/Esri/geotrigger-js#browser-support).
+The Geotrigger.Faker library relies on [Geotrigger.js](http://github.com/esri/geotrigger-js), which requires CORS support or a server-side proxy when running in a browser. Read more about browser support [here](https://github.com/Esri/geotrigger-js#browser-support).
 
 ```html
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Geofaker</title>
+  <title>Geotrigger Faker</title>
 </head>
 <body>
   <script src="/path/to/geotrigger.js"></script>
-  <script src="/path/to/geofaker.js"></script>
+  <script src="/path/to/geotrigger-faker.js"></script>
   <script>
-    var faker = new Geofaker({
+    var device = new Geotrigger.Faker({
       clientId: 'XXXXXX'
     });
 
@@ -126,7 +126,7 @@ Geofaker.js relies on [Geotrigger.js](http://github.com/esri/geotrigger-js), whi
       trackingProfile: 'adaptive' // optional, defaults to 'adaptive'
     };
 
-    faker.send(update, function(error, response) {
+    device.send(update, function(error, response) {
       // do something
     });
   </script>
@@ -138,11 +138,11 @@ Geofaker.js relies on [Geotrigger.js](http://github.com/esri/geotrigger-js), whi
 
 #### Node.js
 
-Location: `/geofaker.js` (root)
+Location: `/geotrigger-faker.js` (root)
 
 #### Browser
 
-Location: `/dist/browser/geofaker.js`
+Location: `/dist/browser/geotrigger-faker.js`
 
 ##### Notes
 
@@ -151,13 +151,13 @@ You'll always need to include a copy of geotrigger.js when developing for browse
 
 ### Examples
 
-#### Geofaker Web Application
+#### Geotrigger Faker Web Application
 
 A full-fledged client-side device location faker.
 
 Location: `/examples/browser/`
 
-The Geofaker web app can be used at [esri.github.io/geofaker-js](http://esri.github.io/geofaker-js/).
+The Geotrigger Faker web app can be used at [esri.github.io/geotrigger-faker](http://esri.github.io/geotrigger-faker/).
 
 #### Command Line
 
@@ -169,7 +169,7 @@ Can be run with the following command, where XXXXXX is a valid Client ID:
 $ node examples/cli/cli.js XXXXXX
 ```
 
-Console logs a response from a dummy location update supplied in the script.
+Logs a response to the terminal from a dummy location update supplied in the script.
 A quick way to ensure the library is working and the client ID is valid.
 
 #### Reference

@@ -1,3 +1,4 @@
-window.Geofaker = Geofaker;
 
-})(window);
+Geotrigger.Faker = Faker;
+
+})(Geotrigger);

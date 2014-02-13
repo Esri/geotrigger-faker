@@ -122,7 +122,7 @@
 
     $el.find('input').attr('disabled','disabled');
 
-    faker.device = new Geofaker(options);
+    faker.device = new Geotrigger.Faker(options);
 
     faker.device.session.on('authentication:error', function(){
       $el.removeAttr('disabled');
@@ -320,8 +320,5 @@
   }
 
   $(init);
-
-  // expose if people want to mess around with the API themselves
-  window.faker = faker;
 
 })(window);

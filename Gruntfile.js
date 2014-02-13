@@ -16,20 +16,20 @@ module.exports = function(grunt) {
       browser: {
         src: [
           'src/browser/header.js',
-          'src/geofaker.js',
+          'src/main.js',
           'src/browser/footer.js'
         ],
-        dest: 'dist/browser/geofaker.js'
+        dest: 'dist/browser/geotrigger-faker.js'
       },
 
       // Node distribution
       node: {
         src: [
           'src/node/header.js',
-          'src/geofaker.js',
+          'src/main.js',
           'src/node/footer.js'
         ],
-        dest: 'geofaker.js'
+        dest: 'geotrigger-faker.js'
       }
     },
 
@@ -43,7 +43,7 @@ module.exports = function(grunt) {
       },
       browser: {
         files: {
-          'dist/browser/geofaker.min.js': ['dist/browser/geofaker.js']
+          'dist/browser/geotrigger-faker.min.js': ['dist/browser/geotrigger-faker.js']
         }
       }
     }
