@@ -230,8 +230,23 @@
     });
   }
 
+  function handleClick (event) {
+    var circle = new L.Circle(event.latlng, 100, editOptions.shapeOptions);
+    if (faker.drawing) {
+      faker.map.fire("draw:created", {
+        layerType: 'circle',
+        layer: circle,
+        target: circle
+      });
+      faker.tools.radius.disable();
+    }
+  }
+
   function initDraw () {
     faker.tools.radius = new L.Draw.Circle(faker.map, editOptions);
+
+    faker.triggers.on('click', handleClick);
+    faker.map.on('click', handleClick);
 
     faker.map.on('draw:created', function(event) {
       faker.$.update.removeAttr('disabled');
