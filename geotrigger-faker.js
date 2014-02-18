@@ -1,4 +1,4 @@
-/*! geotrigger-faker - v0.3.0 - 2014-02-13
+/*! geotrigger-faker - v0.3.0 - 2014-02-16
 *   https://github.com/Esri/geotrigger-faker
 *   Copyright (c) 2014 Environmental Systems Research Institute, Inc.
 *   Apache 2.0 License */
@@ -69,9 +69,9 @@ function Faker (options) {
   }
 
   // set things up
-  var settings = {};
+  var settings = options || {};
   settings.clientId = this.clientId = options.clientId;
-  settings.persistSession = false;
+  settings.persistSession = options.persistSession || false;
   settings.proxy = options.proxy || false;
 
   // allow an existing device to be mimicked if a refresh token is provided

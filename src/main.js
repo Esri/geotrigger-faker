@@ -62,9 +62,9 @@ function Faker (options) {
   }
 
   // set things up
-  var settings = {};
+  var settings = options || {};
   settings.clientId = this.clientId = options.clientId;
-  settings.persistSession = false;
+  settings.persistSession = options.persistSession || false;
   settings.proxy = options.proxy || false;
 
   // allow an existing device to be mimicked if a refresh token is provided

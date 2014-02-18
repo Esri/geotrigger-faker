@@ -52,10 +52,12 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
 
-  grunt.registerTask('default', [
+  grunt.registerTask('build', [
     'concat:browser',
     'uglify:browser',
     'concat:node'
   ]);
+
+  grunt.registerTask('default', ['build']);
 
 };
