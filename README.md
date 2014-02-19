@@ -1,8 +1,8 @@
 # Geotrigger Faker
 
-Tiny javascript utility to fake device updates when testing an application that uses the ArcGIS Geotrigger Service.
+Geotrigger Faker is a tiny javascript utility to fake device updates when testing an application that uses the ArcGIS Geotrigger Service.
 
-You can visit the [demo](http://esri.github.io/geotrigger-faker) (only works in browsers with CORS support).
+This is the open source version of the Geotrigger Faker available for Esri customers on the ArcGIS for Developers site. Read more about the faker [here](https://developers.arcgis.com/geotrigger-service/guide/geotrigger-faker/), and find out more about the Esri Geotrigger Service [here](https://developers.arcgis.com/en/features/geotrigger-service/).
 
 ## Features
 
@@ -157,8 +157,6 @@ A full-fledged client-side device location faker.
 
 Location: `/examples/browser/`
 
-The Geotrigger Faker web app can be used at [esri.github.io/geotrigger-faker](http://esri.github.io/geotrigger-faker/).
-
 #### Command Line
 
 Location: `/examples/cli/cli.js`
@@ -174,7 +172,7 @@ A quick way to ensure the library is working and the client ID is valid.
 
 #### Reference
 
-* [location objects](http://esri.github.io/geotrigger-docs/api/location/update/)
+* [location objects](https://developers.arcgis.com/geotrigger-service/api-reference/location-update/)
 
 #### Todo
 
@@ -196,7 +194,7 @@ Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-  http://www.apache.org/licenses/LICENSE-2.0
+> http://www.apache.org/licenses/LICENSE-2.0
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
