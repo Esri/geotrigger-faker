@@ -1,5 +1,8 @@
 # Geofaker.js Changelog
 
+## master
+* bump geotrigger-js to v1.0.0
+
 ## v0.3.0
 * fix circle rendering in browser example (test for distance before geojson)
 * change namespace to `Geotrigger.Faker`, change project name on github and npm (**breaking change**)
