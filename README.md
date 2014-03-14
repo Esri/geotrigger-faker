@@ -7,6 +7,7 @@ This is the open source version of the Geotrigger Faker available for Esri custo
 ## Features
 
 * Register a new device using a valid ArcGIS Client ID
+* Authenticate as a preexisting device using an ArcGIS Client ID and Refresh Token
 * Send location updates to test existing Geotrigger rules
 
 ## Instructions
@@ -136,17 +137,14 @@ The Geotrigger.Faker library relies on [Geotrigger.js](http://github.com/esri/ge
 
 ### Distributions
 
-#### Node.js
+#### Node.js & Browser (one file to rule them all)
 
-Location: `/geotrigger-faker.js` (root)
-
-#### Browser
-
-Location: `/dist/browser/geotrigger-faker.js`
+* Location: `/geotrigger-faker.js`
+* Minified version: `/geotrigger-faker.min.js`
 
 ##### Notes
 
-Both distributions depend on [geotrigger.js](https://github.com/esri/geotrigger-js).
+Geotrigger Faker depends on [geotrigger.js](https://github.com/esri/geotrigger-js).
 You'll always need to include a copy of geotrigger.js when developing for browsers.
 
 ### Examples

@@ -1,4 +1,0 @@
-
-Geotrigger.Faker = Faker;
-
-})(Geotrigger);
