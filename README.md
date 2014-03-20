@@ -173,6 +173,8 @@ This project uses [karma](https://github.com/karma-runner/karma) for client-side
 
 See a missing test? Open an issue, or better yet fork the project and open a pull request!
 
+Note: It's been reported that Karma currently opens many unnecessary connections to Safari in Mavericks and Mountain Lion. Running `defaults write com.apple.Safari ApplePersistenceIgnoreState YES` in the terminal seems to fix this [issue](https://github.com/karma-runner/karma-safari-launcher/issues/6).
+
 ### Resources
 
 * [location objects](https://developers.arcgis.com/geotrigger-service/api-reference/location-update/)
