@@ -144,8 +144,7 @@ The Geotrigger.Faker library relies on [Geotrigger.js](http://github.com/esri/ge
 
 ##### Notes
 
-Geotrigger Faker depends on [geotrigger.js](https://github.com/esri/geotrigger-js).
-You'll always need to include a copy of geotrigger.js when developing for browsers.
+Geotrigger Faker depends on [geotrigger.js](https://github.com/esri/geotrigger-js). You'll always need to include a copy of geotrigger.js when developing for browsers. You'll also need a server-side proxy if you want to support non-CORS browsers like IE 8 and 9.
 
 ### Examples
 
@@ -168,17 +167,21 @@ $ node examples/cli/cli.js XXXXXX
 Logs a response to the terminal from a dummy location update supplied in the script.
 A quick way to ensure the library is working and the client ID is valid.
 
-#### Reference
+### Testing
+
+This project uses [karma](https://github.com/karma-runner/karma) for client-side testing and [mocha](http://visionmedia.github.io/mocha/) for server-side testing. Tests can be run with [grunt](http://gruntjs.com/) using `grunt test` or independently using `karma start` and `mocha spec/fakerSpec.js`.
+
+See a missing test? Open an issue, or better yet fork the project and open a pull request!
+
+Note: It's been reported that Karma currently opens many unnecessary connections to Safari in Mavericks and Mountain Lion. Running `defaults write com.apple.Safari ApplePersistenceIgnoreState YES` in the terminal seems to fix this [issue](https://github.com/karma-runner/karma-safari-launcher/issues/6).
+
+### Resources
 
 * [location objects](https://developers.arcgis.com/geotrigger-service/api-reference/location-update/)
 
-#### Todo
-
-* Tests
-
 ## Issues
 
-Find a bug or want to request a new feature? Please let us know by submitting an [issue](https://github.com/geoloqi/geotrigger-editor/issues).
+Find a bug or want to request a new feature? Please let us know by submitting an [issue](https://github.com/esri/geotrigger-faker/issues).
 
 ## Contributing
 
