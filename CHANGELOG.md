@@ -1,7 +1,9 @@
 # Geofaker.js Changelog
 
-## master
+## v0.4.0
 * bump geotrigger-js to v1.0.0
+* consolidate browser and node versions into one file
+* add test coverage! woo! using karma, mocha, chai
 
 ## v0.3.0
 * fix circle rendering in browser example (test for distance before geojson)

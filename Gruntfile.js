@@ -3,36 +3,6 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
-    // concatenation for different distributions
-    concat: {
-      options: {
-        banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %>\n' +
-        '*   <%= pkg.homepage %>\n' +
-        '*   Copyright (c) <%= grunt.template.today("yyyy") %> Environmental Systems Research Institute, Inc.\n' +
-        '*   Apache 2.0 License */\n\n'
-      },
-
-      // Browser distribution
-      browser: {
-        src: [
-          'src/browser/header.js',
-          'src/main.js',
-          'src/browser/footer.js'
-        ],
-        dest: 'dist/browser/geotrigger-faker.js'
-      },
-
-      // Node distribution
-      node: {
-        src: [
-          'src/node/header.js',
-          'src/main.js',
-          'src/node/footer.js'
-        ],
-        dest: 'geotrigger-faker.js'
-      }
-    },
-
     // uglification for browser distribution
     uglify: {
       options: {
@@ -43,19 +13,35 @@ module.exports = function(grunt) {
       },
       browser: {
         files: {
-          'dist/browser/geotrigger-faker.min.js': ['dist/browser/geotrigger-faker.js']
+          'geotrigger-faker.min.js': ['geotrigger-faker.js']
         }
+      }
+    },
+
+    mochaTest: {
+      test: {
+        options: {
+          reporter: 'spec',
+        },
+        src: ['spec/fakerSpec.js']
+      }
+    },
+
+
+    karma: {
+      test: {
+        configFile: 'karma.conf.js'
       }
     }
   });
 
-  grunt.loadNpmTasks('grunt-contrib-concat');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
+  require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
-  grunt.registerTask('build', [
-    'concat:browser',
-    'uglify:browser',
-    'concat:node'
+  grunt.registerTask('build', ['uglify:browser']);
+
+  grunt.registerTask('test', [
+    'mochaTest',
+    'karma'
   ]);
 
   grunt.registerTask('default', ['build']);
