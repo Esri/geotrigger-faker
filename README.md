@@ -50,6 +50,20 @@ The following (or something similar, depending on whether your device was regist
 }
 ```
 
+Setting the log level in the Android SDK is very similar, put this line anywhere before your call to `GeotriggerService.init()`:
+
+```java
+GeotriggerService.setLoggingLevel(android.util.Log.DEBUG);
+```
+
+When the app is first installed and run, the following (or something very similar) will then show up in your LogCat output after the device has registered itself with our servers:
+
+```
+06-19 11:23:35.409  22681-22766/com.esri.android.geotrigger.debug D/GeotriggerSharedPreferences﹕ refresh_token: iBFTZ02WCglIPTGAojETXhFmLXHAheUAbBz2ZnY8l6naYMsMUNyac4r86jACBMStvzVbeGLFELZqr3ztKKVj35lyObKRz4RSUGRL4CICXGVAK3OS98djWhGB7zWcQHaSfj6GK6XHo6pdUe_KmizNn_iOstjLFwtJG5aKAINiJn53yD8v3yE8IzpbFX3GUn4i7gmCsbx7t1dEuog3TbY5F0n6h4xd4lG8BY0h90jBhgxEAtcjtKoNvApo4Q-GFeMNMX-uTEslBiXs5Q_RmgLOsw..
+```
+
+You should be able to spot it quickly by filtering the LogCat console to look for lines containing `refresh_token`. As of this writing, the refresh token is 280 characters long.
+
 #### `.send(update, callback)`
 
 Method for spoofing device updates. The `update` parameter can be a single location object,
