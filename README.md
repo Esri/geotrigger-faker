@@ -1,16 +1,84 @@
 # Geotrigger Faker
 
+> Fake device location updates for the ArcGIS Geotrigger Service
+
+[![npm][npm-image]][npm-url]
+
+[npm-image]: https://img.shields.io/npm/v/geotrigger-faker.svg?style=flat-square
+[npm-url]: https://www.npmjs.com/package/geotrigger-faker
+
 Geotrigger Faker is a tiny javascript utility to fake device updates when testing an application that uses the ArcGIS Geotrigger Service.
 
 This is the open source version of the Geotrigger Faker available for Esri customers on the ArcGIS for Developers site. Read more about the faker [here](https://developers.arcgis.com/geotrigger-service/guide/geotrigger-faker/), and find out more about the Esri Geotrigger Service [here](https://developers.arcgis.com/en/features/geotrigger-service/).
 
-## Features
+**Features:**
 
 * Register a new device using a valid ArcGIS Client ID
 * Authenticate as a preexisting device using an ArcGIS Client ID and Refresh Token
 * Send location updates to test existing Geotrigger rules
 
-## Instructions
+## Install
+
+```
+npm install geotrigger-faker
+```
+
+## Usage
+
+### Server (Node.js)
+
+```js
+var Geotrigger.Faker = require('geotrigger-faker');
+
+var faker = new Geotrigger.Faker({
+  clientId: 'XXXXXX'
+});
+
+var update = {
+  longitude: -122.716598510742, // required
+  latitude: 45.5780033058926, // required
+  accuracy: 10.0, // optional, defaults to 10.0
+  trackingProfile: 'adaptive' // optional, default to 'adaptive'
+};
+
+faker.send(update, function(error, response) {
+  // do something
+});
+```
+
+### Browser
+
+The `geotrigger-faker` library relies on [Geotrigger.js](http://github.com/esri/geotrigger-js), which requires CORS support or a server-side proxy when running in a browser. Read more about browser support [here](https://github.com/Esri/geotrigger-js#browser-support).
+
+```html
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Geotrigger Faker</title>
+</head>
+<body>
+  <script src="/path/to/geotrigger.js"></script>
+  <script src="/path/to/geotrigger-faker.js"></script>
+  <script>
+    var device = new Geotrigger.Faker({
+      clientId: 'XXXXXX'
+    });
+
+    var update = {
+      longitude: -122.716598510742, // required
+      latitude: 45.5780033058926, // required
+      accuracy: 10.0, // optional, defaults to 10.0
+      trackingProfile: 'adaptive' // optional, defaults to 'adaptive'
+    };
+
+    device.send(update, function(error, response) {
+      // do something
+    });
+  </script>
+</body>
+</html>
+```
 
 ### API
 
@@ -90,63 +158,6 @@ Expects tags to be an array.
 device.setTags(['mr','cool','ice'], function (error, response) {
   /* do something here */
 });
-```
-
-### Usage
-
-#### Node.js
-
-```js
-var Geotrigger.Faker = require('geotrigger-faker');
-
-var faker = new Geotrigger.Faker({
-  clientId: 'XXXXXX'
-});
-
-var update = {
-  longitude: -122.716598510742, // required
-  latitude: 45.5780033058926, // required
-  accuracy: 10.0, // optional, defaults to 10.0
-  trackingProfile: 'adaptive' // optional, default to 'adaptive'
-};
-
-faker.send(update, function(error, response) {
-  // do something
-});
-```
-
-#### Browser
-
-The Geotrigger.Faker library relies on [Geotrigger.js](http://github.com/esri/geotrigger-js), which requires CORS support or a server-side proxy when running in a browser. Read more about browser support [here](https://github.com/Esri/geotrigger-js#browser-support).
-
-```html
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Geotrigger Faker</title>
-</head>
-<body>
-  <script src="/path/to/geotrigger.js"></script>
-  <script src="/path/to/geotrigger-faker.js"></script>
-  <script>
-    var device = new Geotrigger.Faker({
-      clientId: 'XXXXXX'
-    });
-
-    var update = {
-      longitude: -122.716598510742, // required
-      latitude: 45.5780033058926, // required
-      accuracy: 10.0, // optional, defaults to 10.0
-      trackingProfile: 'adaptive' // optional, defaults to 'adaptive'
-    };
-
-    device.send(update, function(error, response) {
-      // do something
-    });
-  </script>
-</body>
-</html>
 ```
 
 ### Distributions
