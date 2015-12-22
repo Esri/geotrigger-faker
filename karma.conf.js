@@ -1,5 +1,5 @@
 module.exports = function(config) {
-  config.set({
+  var configuration = {
     basePath: '',
     frameworks: ['mocha', 'chai'],
     files: [
@@ -17,5 +17,12 @@ module.exports = function(config) {
     autoWatch: false,
     browsers: ['Chrome', 'Firefox', 'Safari', 'PhantomJS'],
     singleRun: true
-  });
+  };
+
+  // Only use Firefox and PhantomJS when running on Travis
+  if (process.env.TRAVIS) {
+    configuration.browsers = ['Firefox', 'PhantomJS'];
+  }
+
+  config.set(configuration);
 };

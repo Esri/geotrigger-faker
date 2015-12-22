@@ -2,6 +2,7 @@
 
 > Fake device location updates for the ArcGIS Geotrigger Service
 
+[![Build Status](https://travis-ci.org/Esri/geotrigger-faker.svg?branch=master)](https://travis-ci.org/Esri/geotrigger-faker)
 [![npm][npm-image]][npm-url]
 
 [npm-image]: https://img.shields.io/npm/v/geotrigger-faker.svg?style=flat-square
