@@ -1,4 +1,4 @@
-# Geotrigger Faker
+# Geotrigger Faker [deprecated]
 
 > Fake device location updates for the ArcGIS Geotrigger Service
 
@@ -217,5 +217,5 @@ Esri welcomes contributions from anyone and everyone. Please see our [guidelines
 
 [Apache 2.0](LICENSE)
 
-<!-- [](Esri Tags: Geotrigger Device Test Testing Location Geolocation) -->
+<!-- [](Esri Tags: Geotrigger Device Test Testing Location Geolocation, deprecated) -->
 <!-- [](Esri Language: JavaScript Node.js) -->
