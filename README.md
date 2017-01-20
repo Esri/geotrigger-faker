@@ -195,7 +195,7 @@ A quick way to ensure the library is working and the client ID is valid.
 
 ### Testing
 
-This project uses [karma](https://github.com/karma-runner/karma) for client-side testing and [mocha](http://visionmedia.github.io/mocha/) for server-side testing. Tests can be run with [grunt](http://gruntjs.com/) using `grunt test` or independently using `karma start` and `mocha spec/fakerSpec.js`.
+This project uses [karma](https://github.com/karma-runner/karma) for client-side testing and [mocha](http://mochajs.org/) for server-side testing. Tests can be run with [grunt](http://gruntjs.com/) using `grunt test` or independently using `karma start` and `mocha spec/fakerSpec.js`.
 
 See a missing test? Open an issue, or better yet fork the project and open a pull request!
 
